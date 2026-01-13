@@ -33,7 +33,7 @@ tic;
 X = X0;
 D = det(X);
 f = (D - 1)^2;             % Objective function value
-Rgrad = 2 * D * (D-1) * X; % Riemannian gradient
+Rgrad = 2 * D * (D-1) * inv(X); % Riemannian gradient
 k = 0;
 bt = zeros(1, 10000);      % Backtracking iteration count at each outer iteration
 retcnt = zeros(1, 10000);  % Retraction count at each outer iteration
@@ -67,7 +67,7 @@ while M.norm(X, Rgrad) >= eps
     bt(k+1) = l;
     retcnt(k+1) = r;
     f = fXp;                   % Update objective value
-    Rgrad = 2*D*(D-1)*X;
+    Rgrad = 2*D*(D-1)*inv(X);
     k = k + 1;
 end
 time = toc;
